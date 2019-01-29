@@ -158,7 +158,7 @@ describe("Fail Method Error: Type", () => {
 
 ////////////////////////////
 
-describe("Fail Method Error: Enhancement Level", () => {
+describe("Success Method Error: Enhancement Level", () => {
     let item = {
       originalName: "Sword",
       name: "Sword",
@@ -169,7 +169,49 @@ describe("Fail Method Error: Enhancement Level", () => {
   
     test("Enhancement Level is too Low", () => {
       () => {
+          expect(en.success(item)).toThrow();
+      };
+    });
+  });
+
+  ////////////////////////////
+
+describe("Fail Method Error: Durabilty Check", () => {
+    let item = {
+      originalName: "Sword",
+      name: "Sword",
+      type: "weapon",
+      durability: 90,
+      enhancement: 5
+    };
+  
+    test("Item Destroyed", () => {
+      () => {
           expect(en.fail(item)).toThrow();
       };
+    });
+  });
+
+  //////////////////////
+
+describe("Fail Method: Success", () => {
+    let item = {
+      originalName: "Sword",
+      name: "[DUO] Sword",
+      type: "weapon",
+      durability: 90,
+      enhancement: 17
+    };
+  
+    let itemFail = {
+      originalName: "Sword",
+      name: "[PRI] Sword",
+      type: "weapon",
+      durability: 80,
+      enhancement: 16
+    };
+  
+    test("repairs item", () => {
+      expect(en.fail(item)).toEqual(itemFail);
     });
   });
